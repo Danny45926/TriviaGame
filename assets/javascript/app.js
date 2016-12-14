@@ -55,7 +55,7 @@
   	// Countdown object
   	var counter = {
 
-  		time: 10,
+  		time: 120,
 
   		reset: function () {
   			counter.time = 120;
@@ -67,9 +67,14 @@
 
   		start: function() {
   			$("#start").hide();
-  			$("#reset").show();
+  			// $("#reset").show();
   			$("#game").show();
   			countDown = setInterval(counter.count, 1000);
+
+  			 if(counter.count <= 0) {
+  				clearInterval(counter.count);
+  			}
+
 
   			// for (var i = 0; i < questions.length; i++){
   			// 	$("#list").append(questions[i].question + "<br>");
@@ -107,8 +112,8 @@
 
   			$("#display").html("<br>" + "Time Remaining: " + converted);
   			 // Stops the countDown when the time is up
-  			 if(countDown <= 0) {
-  				clearInterval(countDown);
+  			 if(converted <= "00:00") {
+  				clearInterval(converted);
   			}
   		},
 
@@ -132,7 +137,25 @@
   		},
   	}
 
-  	$("#start").on("click", counter.start);
+  	var gameSound = 'assets/music/WalkingOnADream.mp3';
+  	var winSound = 'assets/music/WeAreTheChampions.mp3';
+
+	// , '..assets/music/AhFeeling.mp3', '..assets/music/IsThisLove.mp3']
+	var audio;
+
+	function playSound(snd) {
+		audio = new Audio(snd)
+		audio.play()
+
+		if(playSound(gameSound)) {
+			audio.currentTime = 39;
+		}
+		// setTimeout(function(){
+		// 	audio.pause();
+		// 	audio.currentTime = 0;
+		// }, 30 * 1000);
+	}
+  	$("#start").on("click", counter.start, 	playSound(gameSound));
   	$("#reset").on("click", counter.reset);
 
   	var correctCounter = 0;
@@ -222,6 +245,8 @@
 
   	
   	$("#submit").on("click", function () {
+  		audio.pause();
+  		playSound(winSound).attr("audiocurrentTime", 39);
   		$("#game").hide()
   		$("#display").hide();
   		$("#main").append("Correct: " + correctCounter + "<br>");
