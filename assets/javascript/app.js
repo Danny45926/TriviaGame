@@ -4,12 +4,12 @@
  // The player is only allowed to choose one answer for every quetion
  // Need a key that hosts the correct answer for each question
  // Need a variable to count the amount of right, wrong, and unanswered questions
+  	// $("#reset").hide();
+  	// $("#game").hide();
+  $(window).on("load",function(){
   	$("#reset").hide();
   	$("#game").hide();
-  // $(window).on("load",function(){
-  // 	$("#reset").hide();
-  // 	$("#game").hide();
-  // }) 
+  }) 
 
   $(document).ready(function() {
 
@@ -61,13 +61,11 @@
   			counter.time = 120;
   			counter.start;
 
-  			$("#display").html("02:00")
-
   		},
 
   		start: function() {
   			$("#start").hide();
-  			// $("#reset").show();
+  			$("#reset").show();
   			$("#game").show();
   			countDown = setInterval(counter.count, 1000);
 
@@ -138,25 +136,40 @@
   	}
 
   	var gameSound = 'assets/music/WalkingOnADream.mp3';
-  	var winSound = 'assets/music/WeAreTheChampions.mp3';
+ 
 
 	// , '..assets/music/AhFeeling.mp3', '..assets/music/IsThisLove.mp3']
 	var audio;
 
 	function playSound(snd) {
 		audio = new Audio(snd)
-		audio.play()
-
-		if(playSound(gameSound)) {
-			audio.currentTime = 39;
-		}
-		// setTimeout(function(){
-		// 	audio.pause();
-		// 	audio.currentTime = 0;
-		// }, 30 * 1000);
+		audio.play();
 	}
+
   	$("#start").on("click", counter.start, 	playSound(gameSound));
-  	$("#reset").on("click", counter.reset);
+  	// $("#reset").on("click", counter.reset);
+
+  	var isPlaying;
+
+  	$("#pause-audio").on("click", function () {
+  		audio.pause();
+  // 		if (isPlaying) {
+		//     audio.pause()
+		//   } else {
+		//     audio.play();
+		//   }
+		// audio.onplaying = function() {
+		//   isPlaying = true;
+		// };
+		// audio.onpause = function() {
+		//   isPlaying = false;
+		// };
+  		
+  	})
+  	// Restarts the page
+	$("#reset").on("click", function restart() {
+		location.reload();
+	});
 
   	var correctCounter = 0;
   	var incorrectCounter = 0;
@@ -238,20 +251,30 @@
 	  	}else if(questionFive != "The Sugarhill Gang"){
 	  		incorrectCounter++;
 	  		console.log(incorrectCounter)
-	  	}else if(questionFive == ""){
+	  	}else if(questionFive == "") {
 	  		unansweredCounter++;
 	  	}
 	  });
 
-  	
+  	var winSound = 'assets/music/MusicSoundsBetterWithYou.mp3';
+
+  	var audio2;
+
+  	function winMusic(snd) {
+		audio = new Audio(snd)
+		
+		audio.currentTime = 56.5;
+		audio.play();
+	}
+
   	$("#submit").on("click", function () {
   		audio.pause();
-  		playSound(winSound).attr("audiocurrentTime", 39);
+  		winMusic(winSound);
   		$("#game").hide()
   		$("#display").hide();
-  		$("#main").append("Correct: " + correctCounter + "<br>");
-  		$("#main").append("Incorrect: " + incorrectCounter + "<br>");
-  		$("#main").append("Unanswered: " + unansweredCounter);
+  		$("#main-container").append("Correct: " + correctCounter + "<br>");
+  		$("#main-container").append("Incorrect: " + incorrectCounter + "<br>");
+  		$("#main-container").append("Unanswered: " + unansweredCounter);
   	})
 
 
@@ -259,7 +282,7 @@
   	function display() {
   		if(converted=0) {
   			$("#game").hide();
-  			$("#display").hide();
+  			// $("#display").hide();
   			$("#main").append("Correct: " + correctCounter + "<br>");
   			$("#main").append("Incorrect: " + incorrectCounter + "<br>");
   		}
