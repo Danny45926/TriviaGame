@@ -1,0 +1,399 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Trivia Game</title>
+	<!-- <link rel="stylesheet" type="text/css" href="assests/css/style.css"> -->
+	<link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	 
+		
+		<section id = 'section'>
+			
+			<h1 id = 'title'>Geography Trivia</h1>
+
+			<button type="button" id ='start'>Start</button>
+
+			<h2 id = 'correct'></h2>
+			
+			<h2 id ='wrong'></h2>
+
+		<form  class = "everyThing">
+		  	<div class= 'hide'>
+				<div id = 'display'>00:00</div>
+				<p class = 'questions'>1. What continent is Turkey located in?</p>
+				
+					<input type="radio" name="q1" value="a" ><label for="q1a">North America</label><br/>
+					
+					<input type="radio" name="q1" value="b" ><label for="q1b">Asia</label><br/>
+					
+					<input type="radio" name="q1" value="c" ><label for="q1c">Middle East</label><br/>
+					
+					<input type="radio" name="q1" value="d" ><label for="q1d">Europe</label><br/>
+					
+				<p class = 'questions'>2. Canberra is the capital of what country?</p>
+				
+					<input type="radio" name="q2" value="a" id="q1a"><label for="q1a">Wales</label><br/>
+					
+					<input type="radio" name="q2" value="b" id="q1b"><label for="q1b">Australia</label><br/>
+					
+					<input type="radio" name="q2" value="c" id="q1c"><label for="q1c">Scotland</label><br/>
+					
+					<input type="radio" name="q2" value="d" id="q1d"><label for="q1d">India</label><br/>
+
+				<p class = 'questions'>3. Which is the smallest country in the world?</p>
+				
+					<input type="radio" name="q3" value="a" id="q1a"><label for="q1a">Vatican City</label><br/>
+					
+					<input type="radio" name="q3" value="b" id="q1b"><label for="q1b">Maldives</label><br/>
+					
+					<input type="radio" name="q3" value="c" id="q1c"><label for="q1c">Ivory Coast</label><br/>
+					
+					<input type="radio" name="q3" value="d" id="q1d"><label for="q1d">Monaco</label><br/>
+
+				<p class = 'questions'>4. What is the country with the heighest average elevation?</p>
+				
+					<input type="radio" name="q4" value="a" id="q1a"><label for="q1a">Chile</label><br/>
+					
+					<input type="radio" name="q4" value="b" id="q1b"><label for="q1b">Nepal</label><br/>
+					
+					<input type="radio" name="q4" value="c" id="q1c"><label for="q1c">Bhutan</label><br/>
+					
+					<input type="radio" name="q4" value="d" id="q1d"><label for="q1d">Tajikistan</label><br/>
+				
+				<p class = 'questions'>5. What is the capital of Switzerland?</p>
+				
+					<input type="radio" name="q5" value="a" id="q1a"><label for="q1a">Geneva</label><br/>
+					
+					<input type="radio" name="q5" value="b" id="q1b"><label for="q1b">Bern</label><br/>
+					
+					<input type="radio" name="q5" value="c" id="q1c"><label for="q1c">Zurich</label><br/>
+					
+					<input type="radio" name="q5" value="d" id="q1d"><label for="q1d">Basel</label><br/>
+					
+				<p class = 'questions'>6. What countries make up the Iberian Peninsula?</p>
+				
+					<input type="radio" name="q6" value="a" id="q1a"><label for="q1a">Portugal and Spain</label><br/>
+					
+					<input type="radio" name="q6" value="b" id="q1b"><label for="q1b">Denmark and Germany</label><br/>
+					
+					<input type="radio" name="q6" value="c" id="q1c"><label for="q1c">Sweden and Norway</label><br/>
+					
+					<input type="radio" name="q6" value="d" id="q1d"><label for="q1d">Ireland and Nothern Ireland</label><br/>
+				
+				<p class = 'questions'>7. What is the biggest country in the Western Hemisphere?</p>
+				
+					<input type="radio" name="q7" value="a" id="q1a"><label for="q1a">Mexico</label><br/>
+					
+					<input type="radio" name="q7" value="b" id="q1b"><label for="q1b">Brazil</label><br/>
+					
+					<input type="radio" name="q7" value="c" id="q1c"><label for="q1c">Canada</label><br/>
+					
+					<input type="radio" name="q7" value="d" id="q1d"><label for="q1d">United States of America</label><br/>
+					
+				<p class = 'questions'>8. What city is not in Africa?</p>
+				
+					<input type="radio" name="q8" value="a" id="q1a"><label for="q1a">Cairo</label><br/>
+					
+					<input type="radio" name="q8" value="b" id="q1b"><label for="q1b">Lagos</label><br/>
+					
+					<input type="radio" name="q8" value="c" id="q1c"><label for="q1c">Burrel</label><br/>
+					
+					<input type="radio" name="q8" value="d" id="q1d"><label for="q1d">Johannesburg</label><br/>	
+			
+				<p class = 'questions'>9. What is the capital of Iraq? </p>
+				
+					<input type="radio" name="q9" value="a" id="q1a"><label for="q1a">Damascus</label><br/>
+					
+					<input type="radio" name="q9" value="b" id="q1b"><label for="q1b">Baghdad</label><br/>
+					
+					<input type="radio" name="q9" value="c" id="q1c"><label for="q1c">Fallujah</label><br/>
+					
+					<input type="radio" name="q9" value="d" id="q1d"><label for="q1d">Kabul</label><br/>
+				
+				<p class = 'questions'>10. What is the longest country in the world?</p>
+				
+					<input type="radio" name="q10" value="a" id="q1a"><label for="q1a">Thailand</label><br/>
+					
+					<input type="radio" name="q10" value="b" id="q1b"><label for="q1b">Chile</label><br/>
+					
+					<input type="radio" name="q10" value="c" id="q1c"><label for="q1c">Russia</label><br/>
+					
+					<input type="radio" name="q10" value="d" id="q1d"><label for="q1d">Mexico</label><br/>
+			</div>
+		</form>
+	</section>
+
+	  <!-- jQuery -->
+   		    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+	
+    <!-- Begin our custom Javascript -->
+            <script type="text/javascript">
+ 
+			     
+       	var counter;
+
+       	var game = {
+		  //stop watch.
+       	
+		 time: 50,
+
+		 start: function() {
+		  counter = setInterval(game.count, 1000);
+		  $('.everyThing').show();
+
+
+		},
+
+		 count: function() {
+ 
+		  game.time--;
+		
+		  var converted = game.timeConverter(game.time);
+		 
+		  $("#display").html(converted);
+
+		  if(game.time == 0){
+		  	console.log('over');
+		   $('#wrong').show();
+		   $('#correct').show();
+
+		  	}
+		},
+
+		 timeConverter: function(t) {
+
+		  var minutes = Math.floor(t / 60);
+		  var seconds = t - (minutes * 60);
+
+		  if (seconds < 10) {
+		    seconds = "0" + seconds;
+		  }
+
+		  if (minutes === 0) {
+		    minutes = "00";
+		  }
+		  else if (minutes < 10) {
+		    minutes = "0" + minutes;
+		  }
+
+		  return minutes + ":" + seconds;
+		}
+
+	}
+
+		    //start button
+
+       $('#start').on('click', game.start);
+      
+       // function startButton() {
+       // 		$('.everyThing').show();
+       // 		start();
+       // }
+
+			//radio input
+					var correct = 0;
+           	 		var wrong = 0;
+
+
+			   $("input[name='q1']").change(function(){
+			       
+			   		
+
+			        var name = $( "input[name='q1']:checked" ).val();
+			       
+			        if (name == 'd'){
+			       
+			            correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+
+			    $("input[name='q2']").change(function(){
+			       
+			
+
+
+			        var name = $( "input[name='q2']:checked" ).val();
+			       
+			        if (name == 'b'){
+			       
+			            correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			     $("input[name='q3']").change(function(){   															
+					
+
+
+			        var name = $( "input[name='q3']:checked" ).val();
+			       
+			        if (name == 'a'){
+			       
+			          correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			      $("input[name='q4']").change(function(){
+
+					
+
+			       
+			        var name = $( "input[name='q4']:checked" ).val();
+			       
+			        if (name == 'c'){
+			       
+			           correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			       $("input[name='q5']").change(function(){
+			       
+					
+
+
+			        var name = $( "input[name='q5']:checked" ).val();
+			       
+			        if (name == 'b'){
+			       
+			           correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			        $("input[name='q6']").change(function(){
+			       
+						
+
+
+			       	 var name = $( "input[name='q6']:checked" ).val();
+			       
+			        if (name == 'a'){
+			       
+			           correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			         $("input[name='q7']").change(function(){
+
+						
+
+			       
+			        var name = $( "input[name='q7']:checked" ).val();
+			       
+			        if (name == 'c'){
+			       
+			            correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			         $("input[name='q8']").change(function(){
+
+				     
+
+			       
+			        var name = $( "input[name='q8']:checked" ).val();
+			       
+			        if (name == 'c'){
+			       
+			            correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+
+			         $("input[name='q9']").change(function(){
+
+						
+
+			       
+			        var name = $( "input[name='q9']:checked" ).val();
+			       
+			        if (name == 'b'){
+			       
+			            correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 
+ 					 $("input[name='q10']").change(function(){
+
+					
+
+			       
+			        var name = $( "input[name='q10']:checked" ).val();
+			       
+			        if (name == 'b'){
+			       
+			           correct++;
+			            $('#correct').html('Correct answers: ' + correct)
+			       
+			        }else {
+			   
+			            wrong++;
+			            $('#wrong').html('Wrong answers: ' + wrong);
+			        }
+			    }); 		
+
+
+
+
+    			
+
+
+
+
+    </script>
+</body>
+</html>

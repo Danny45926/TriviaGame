@@ -6,21 +6,20 @@
  // Need a variable to count the amount of right, wrong, and unanswered questions
   	// $("#reset").hide();
   	// $("#game").hide();
-  $(window).on("load",function(){
-  	$("#reset").hide();
-  	$("#game").hide();
-  }) 
+  // $(window).on("load",function(){
+  	// $("#reset").hide();
+  	// $("#game").hide();
+  // }) 
 
   $(document).ready(function() {
+    var gameSound = 'assets/music/WalkingOnADream.mp3';
+    var audio;
+  // Plays game sound on page load
+    function playSound(snd) {
+      audio = new Audio(snd)
+      audio.play();
+    } playSound(gameSound);
 
-
-  // $("#reset").hide();
-  // $("#questions").hide();
-
-
-  // This function starts the game when the button is pressed
-
-    
     var questions =  [
     	{
     		question: "Which Artist Is Number #1 On The List For 250 Million Or More Records Sold?",
@@ -64,16 +63,18 @@
   		},
 
   		start: function() {
-  			$("#start").hide();
-  			$("#reset").show();
-  			$("#game").show();
+
   			countDown = setInterval(counter.count, 1000);
 
-  			 if(counter.count <= 0) {
-  				clearInterval(counter.count);
+  			if (countDown === 0) {
+  			clearInterval(countDown);
   			}
 
-
+  			//  function stopGame() {
+  			//  	if(countDown <= counter.count) {
+  			// 	clearInterval(countDown);
+  			// 	}
+  			// }
   			// for (var i = 0; i < questions.length; i++){
   			// 	$("#list").append(questions[i].question + "<br>");
 
@@ -108,11 +109,7 @@
 
   			var converted = counter.timeConverter(counter.time);
 
-  			$("#display").html("<br>" + "Time Remaining: " + converted);
-  			 // Stops the countDown when the time is up
-  			 if(converted <= "00:00") {
-  				clearInterval(converted);
-  			}
+  			$(".display").html("<br>" + "Time Remaining: " + converted);
   		},
 
   		timeConverter: function(t) {
@@ -135,46 +132,36 @@
   		},
   	}
 
-  	var gameSound = 'assets/music/WalkingOnADream.mp3';
- 
+// List of on click functions:
 
-	// , '..assets/music/AhFeeling.mp3', '..assets/music/IsThisLove.mp3']
-	var audio;
+  // This function starts the game when the button is pressed
+  // $("#start").on("click", function(){
+  //     window.location.href = "game.html";
+  //   });
 
-	function playSound(snd) {
-		audio = new Audio(snd)
-		audio.play();
-	}
+  $(".img").on("click", function () {
+  		  
+        var play = "./assets/images/playbutton.png"
+        var pause = "./assets/images/pausebutton.png"
+        var state = $(this).attr("data-state");
 
-  	$("#start").on("click", counter.start, 	playSound(gameSound));
-  	// $("#reset").on("click", counter.reset);
-
-  	var isPlaying;
-
-  	$("#pause-audio").on("click", function () {
-  		audio.pause();
-  // 		if (isPlaying) {
-		//     audio.pause()
-		//   } else {
-		//     audio.play();
-		//   }
-		// audio.onplaying = function() {
-		//   isPlaying = true;
-		// };
-		// audio.onpause = function() {
-		//   isPlaying = false;
-		// };
-  		
+        if(state === "pause"){
+          audio.pause();
+          $(".img").attr('src', play);
+          $(this).attr("data-state", "play")
+        }else {
+          audio.play()
+          $(".img").attr('src', pause);
+          $(this).attr("data-state", "pause")
+        }
   	})
-  	// Restarts the page
-	$("#reset").on("click", function restart() {
-		location.reload();
-	});
 
+  // Variables that hold the results
   	var correctCounter = 0;
   	var incorrectCounter = 0;
   	var unansweredCounter = 0;
 
+    // List of Questions 
   	$("#q1").on("click", "input", function () {
   		var checkVal = ($(this).val()); 
   		var userGuess = checkVal;
@@ -239,7 +226,7 @@
 	  		unansweredCounter++;
 	  	}
 	  });
-  	  	 $("#q5").on("click", "input", function () {
+  	 $("#q5").on("click", "input", function () {
   		var checkVal = ($(this).val()); 
   		var userGuess = checkVal;
 	  	console.log(userGuess);
@@ -256,18 +243,18 @@
 	  	}
 	  });
 
+  // Function to play music when you win
   	var winSound = 'assets/music/MusicSoundsBetterWithYou.mp3';
-
   	var audio2;
-
   	function winMusic(snd) {
 		audio = new Audio(snd)
 		
-		audio.currentTime = 56.5;
+		audio.currentTime = 62;
 		audio.play();
 	}
 
-  	$("#submit").on("click", function () {
+  // When the user clicks submit, the form is hidden, win music plays, and user results are displayed
+  $("#submit").on("click", function () {
   		audio.pause();
   		winMusic(winSound);
   		$("#game").hide()
@@ -277,16 +264,16 @@
   		$("#main-container").append("Unanswered: " + unansweredCounter);
   	})
 
-
-
-  	function display() {
-  		if(converted=0) {
-  			$("#game").hide();
-  			// $("#display").hide();
-  			$("#main").append("Correct: " + correctCounter + "<br>");
-  			$("#main").append("Incorrect: " + incorrectCounter + "<br>");
-  		}
-  	};
+  // Function runs if countdown equals 00:00; game is then over and results are displayed
+  	// function display() {
+  	// 	if(countDown <= "00:00") {
+  	// 		$("#game").hide();
+  	// 		// $("#display").hide();
+  	// 		$("#main").append("Correct: " + correctCounter + "<br>");
+  	// 		$("#main").append("Incorrect: " + incorrectCounter + "<br>");
+  	// 	}
+  	// };
+  
 
 
   		// if (checkedValue === form.questions[i].answer) {
