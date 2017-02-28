@@ -1,24 +1,10 @@
- // Need a start button that starts the game and redirects user to the next page
- // List of multiple choice questions are displayed on the page
- // The player has a limited amount of time to finish the quiz
- // The player is only allowed to choose one answer for every quetion
- // Need a key that hosts the correct answer for each question
- // Need a variable to count the amount of right, wrong, and unanswered questions
-  	// $("#reset").hide();
-  	// $("#game").hide();
-  // $(window).on("load",function(){
-  	// $("#reset").hide();
-  	// $("#game").hide();
-  // }) 
+ 
+$(document).ready(function() {
 
-  $(document).ready(function() {
-    var gameSound = 'assets/music/WalkingOnADream.mp3';
-    var audio;
-  // Plays game sound on page load
-    function playSound(snd) {
-      audio = new Audio(snd)
-      audio.play();
-    } playSound(gameSound);
+  // Variables that hold the results
+    var correctCounter = 0;
+    var incorrectCounter = 0;
+    var unansweredCounter = 0;
 
     var questions =  [
     	{
@@ -66,9 +52,10 @@
 
   			countDown = setInterval(counter.count, 1000);
 
-  			if (countDown === 0) {
-  			clearInterval(countDown);
-  			}
+
+  			// if (counter.time == 0) {
+  			// clearInterval(countDown);
+  			// }
 
   			//  function stopGame() {
   			//  	if(countDown <= counter.count) {
@@ -110,6 +97,20 @@
   			var converted = counter.timeConverter(counter.time);
 
   			$(".display").html("<br>" + "Time Remaining: " + converted);
+
+        // When counter reaches 00:00, game is over and the results are displayed
+        if(counter.time == 0){
+          clearInterval(counter.time)
+          audio.pause();
+          winMusic(winSound);
+          $("#game").hide()
+          $("#display").hide();
+          $(".main").append("<br>")
+          $(".main").append("Correct: " + correctCounter + "<br>");
+          $(".main").append("Incorrect: " + incorrectCounter + "<br>");
+          $(".main").append("Unanswered: " + unansweredCounter);
+          
+        }
   		},
 
   		timeConverter: function(t) {
@@ -132,13 +133,21 @@
   		},
   	}
 
-// List of on click functions:
+// On game.html page load, the timer starts, and music starts playing
+    var gameSound = 'assets/music/WalkingOnADream.mp3';
+    var audio;
+  // Plays game sound on page load
+    function playSound(snd) {
+      audio = new Audio(snd)
+      audio.play();
+    } playSound(gameSound);
 
-  // This function starts the game when the button is pressed
-  // $("#start").on("click", function(){
-  //     window.location.href = "game.html";
-  //   });
+    counter.start();
 
+
+  // Pause Play Button on click function
+  // When the music is playing, the pause image appears
+  // On click the music is paused and the image is changed to the play button
   $(".img").on("click", function () {
   		  
         var play = "./assets/images/playbutton.png"
@@ -156,12 +165,8 @@
         }
   	})
 
-  // Variables that hold the results
-  	var correctCounter = 0;
-  	var incorrectCounter = 0;
-  	var unansweredCounter = 0;
-
-    // List of Questions 
+  // List of Questions
+  // Depending on the checked userChoice, we use conditionals to add to the correct or incorrect counter
   	$("#q1").on("click", "input", function () {
   		var checkVal = ($(this).val()); 
   		var userGuess = checkVal;
@@ -243,7 +248,8 @@
 	  	}
 	  });
 
-  // Function to play music when you win
+  // Function that plays music when called from the submit button
+  // Music is played on the results page
   	var winSound = 'assets/music/MusicSoundsBetterWithYou.mp3';
   	var audio2;
   	function winMusic(snd) {
@@ -255,13 +261,14 @@
 
   // When the user clicks submit, the form is hidden, win music plays, and user results are displayed
   $("#submit").on("click", function () {
+      clearInterval(countDown)
   		audio.pause();
   		winMusic(winSound);
   		$("#game").hide()
   		$("#display").hide();
-  		$("#main-container").append("Correct: " + correctCounter + "<br>");
-  		$("#main-container").append("Incorrect: " + incorrectCounter + "<br>");
-  		$("#main-container").append("Unanswered: " + unansweredCounter);
+  		$(".main").append("Correct: " + correctCounter + "<br>");
+  		$(".main").append("Incorrect: " + incorrectCounter + "<br>");
+  		$(".main").append("Unanswered: " + unansweredCounter);
   	})
 
   // Function runs if countdown equals 00:00; game is then over and results are displayed
@@ -273,19 +280,6 @@
   	// 		$("#main").append("Incorrect: " + incorrectCounter + "<br>");
   	// 	}
   	// };
-  
-
-
-  		// if (checkedValue === form.questions[i].answer) {
-  		// 	correctAnswer++;
-  		// }else if (checkedValue != form.questions[i].answer){
-  		// 	wrongAnswer++;
-  		// }else{
-  		// 	unanswered++;
-  		// }
-  	
-
-
 
   // checkAnswer();
 	$( "form" ).submit(function( event ) {
