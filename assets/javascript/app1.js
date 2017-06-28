@@ -2,6 +2,7 @@ var correctCounter = 0;
 var incorrectCounter = 0;
 var unansweredCounter = 0;
 var questionCounter = 0;
+var userGuess = "";
 
 var questions =  [
 	{
@@ -62,6 +63,11 @@ var questions =  [
         // clearInterval(counter.time)
         // audio.pause();
         // winMusic(winSound);
+        if(userGuess == ""){
+        	unansweredCounter++;
+        	// console.log();
+        }
+
         nextQuestion();
       }
 		},
@@ -166,7 +172,7 @@ $(document).ready(function() {
 
 	$("#questionForm").on("click", "input", function () {
   		var checkVal = ($(this).val()); 
-  		var userGuess = checkVal;
+  		userGuess = checkVal;
 	  	console.log(userGuess);
 
 	  	var userAnswer = $("input[name='option']:checked").val();
@@ -179,12 +185,13 @@ $(document).ready(function() {
 	  	}else if(userAnswer != correctAnswer ){
 	  		incorrectCounter++;
 	  		console.log(incorrectCounter)
-	  	}else if(userAnswer == ""){
-	  		unansweredCounter++;
 	  	}
 	 });
 
 	 $("#submit").on("click", function () {
+	 		if(userGuess == ""){
+	 			unansweredCounter++;
+	 		}
       setTimeout(nextQuestion(), 3000);
   	});
 });
