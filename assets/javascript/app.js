@@ -269,7 +269,7 @@ $(document).ready(function() {
   		$(".main").append("Correct: " + correctCounter + "<br>");
   		$(".main").append("Incorrect: " + incorrectCounter + "<br>");
   		$(".main").append("Unanswered: " + unansweredCounter);
-  	})
+  	});
 
   // Function runs if countdown equals 00:00; game is then over and results are displayed
   	// function display() {

@@ -38,20 +38,18 @@ var questions =  [
 	// Countdown object
 	var counter = {
 
-		time: 5,
+		time: 60,
 
 		reset: function () {
-			counter.time = 5;
+			counter.time = 60;
 			counter.start;
 
 		},
-
 		start: function() {
 
 			countDown = setInterval(counter.count, 1000);
 
 		},
-
 		count: function() {
 			counter.time--;
 
@@ -61,20 +59,12 @@ var questions =  [
 
       // When counter reaches 00:00, game is over and the results are displayed
       if(counter.time == 0){
-        clearInterval(counter.time)
+        // clearInterval(counter.time)
         // audio.pause();
         // winMusic(winSound);
         nextQuestion();
-        // $("#game").hide()
-        // $("#display").hide();
-        // $(".main").append("<br>")
-        // $(".main").append("Correct: " + correctCounter + "<br>");
-        // $(".main").append("Incorrect: " + incorrectCounter + "<br>");
-        // $(".main").append("Unanswered: " + unansweredCounter);
-        
       }
 		},
-
 		timeConverter: function(t) {
 
     var minutes = Math.floor(t / 60);
@@ -97,47 +87,57 @@ var questions =  [
 
 
 function displayQuestion() {
-	var question = questions[questionCounter].question
-	console.log(question);
 
-	$("#questionForm").append($("<h3>" +question + "</h3>"));
+	if(questionCounter < questions.length){
 
-	for(var i=0; i < questions[questionCounter].options.length; i++){
+			var question = questions[questionCounter].question
+	// console.log(question);
+			$("#questionForm").append($("<h3>" +question + "</h3>"));
 
-			// console.log(questions[questionCounter].options[i])
-			var option = questions[questionCounter].options[i];
-			var input = $("<input>").attr('type', 'radio').attr('value', option);
-			// console.log(input)
-			var label = $("<label id='option'>").html(option);		
-			// console.log(label)
+		for(var i=0; i < questions[questionCounter].options.length; i++){
 
-			label.append(input);
-			var space = $("<br>");
-			label.append(space);
+				// console.log(questions[questionCounter].options[i])
+				var option = questions[questionCounter].options[i];
+				var input = $("<input name='option'>").attr('type', 'radio').attr('value', option);
+				// console.log(input)
+				var label = $("<label id='option'>").html(option);		
+				// console.log(label)
+				label.append(input);
+				var space = $("<br>");
+				label.append(space);
 
-			// console.log(input);  
-			$("#questionForm").append(label);
-	}
+				// console.log(input);  
+				$("#questionForm").append(label);
+			}	
 	// Countdown starts here
-  counter.start();
+  	counter.start();
+	}
+	else{
+		clearInterval(countDown);
+		// audio.pause();
+		// winMusic(winSound);
+		$("#game").hide()
+		$(".display").hide();
+		$(".main").append("Correct: " + correctCounter + "<br>");
+		$(".main").append("Incorrect: " + incorrectCounter + "<br>");
+		$(".main").append("Unanswered: " + unansweredCounter);
+	}
 };
 
 // When this function is executed questionCounter is incremented by 1 and the next question in the array of questions is displayed on the screen
 
 function nextQuestion(){
-	questionCounter++;
-	counter.time = 5;
-	$("#questionForm").empty();
+
+		questionCounter++;
+		counter.time = 60;
+		$("#questionForm").empty();
+		displayQuestion();
+};
+
 	displayQuestion();
-}
-
-
-	displayQuestion();
-
 
 
 $(document).ready(function() {
-
 
 	var gameSound = 'assets/music/WalkingOnADream.mp3';
   var audio;
@@ -163,6 +163,30 @@ $(document).ready(function() {
       $(this).attr("data-state", "pause")
     }
 	})
+
+	$("#questionForm").on("click", "input", function () {
+  		var checkVal = ($(this).val()); 
+  		var userGuess = checkVal;
+	  	console.log(userGuess);
+
+	  	var userAnswer = $("input[name='option']:checked").val();
+
+	  	var correctAnswer = questions[questionCounter].answer;
+
+	  	if(userAnswer == correctAnswer) {
+	  		correctCounter++;
+	  		console.log(correctCounter);
+	  	}else if(userAnswer != correctAnswer ){
+	  		incorrectCounter++;
+	  		console.log(incorrectCounter)
+	  	}else if(userAnswer == ""){
+	  		unansweredCounter++;
+	  	}
+	 });
+
+	 $("#submit").on("click", function () {
+      setTimeout(nextQuestion(), 3000);
+  	});
 });
 
 
