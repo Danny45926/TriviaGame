@@ -38,10 +38,10 @@ var questions =  [
 	// Countdown object
 	var counter = {
 
-		time: 120,
+		time: 5,
 
 		reset: function () {
-			counter.time = 120;
+			counter.time = 5;
 			counter.start;
 
 		},
@@ -62,14 +62,15 @@ var questions =  [
       // When counter reaches 00:00, game is over and the results are displayed
       if(counter.time == 0){
         clearInterval(counter.time)
-        audio.pause();
-        winMusic(winSound);
-        $("#game").hide()
-        $("#display").hide();
-        $(".main").append("<br>")
-        $(".main").append("Correct: " + correctCounter + "<br>");
-        $(".main").append("Incorrect: " + incorrectCounter + "<br>");
-        $(".main").append("Unanswered: " + unansweredCounter);
+        // audio.pause();
+        // winMusic(winSound);
+        nextQuestion();
+        // $("#game").hide()
+        // $("#display").hide();
+        // $(".main").append("<br>")
+        // $(".main").append("Correct: " + correctCounter + "<br>");
+        // $(".main").append("Incorrect: " + incorrectCounter + "<br>");
+        // $(".main").append("Unanswered: " + unansweredCounter);
         
       }
 		},
@@ -98,22 +99,41 @@ var questions =  [
 function displayQuestion() {
 	var question = questions[questionCounter].question
 	console.log(question);
-	for(var i=0; i < questions[questionCounter].options.length; i++){
-			console.log(questions[questionCounter].options[i])
-	}
 
+	$("#questionForm").append($("<h3>" +question + "</h3>"));
+
+	for(var i=0; i < questions[questionCounter].options.length; i++){
+
+			// console.log(questions[questionCounter].options[i])
+			var option = questions[questionCounter].options[i];
+			var input = $("<input>").attr('type', 'radio').attr('value', option);
+			// console.log(input)
+			var label = $("<label id='option'>").html(option);		
+			// console.log(label)
+
+			label.append(input);
+			var space = $("<br>");
+			label.append(space);
+
+			// console.log(input);  
+			$("#questionForm").append(label);
+	}
+	// Countdown starts here
+  counter.start();
 };
 
 // When this function is executed questionCounter is incremented by 1 and the next question in the array of questions is displayed on the screen
 
 function nextQuestion(){
 	questionCounter++;
+	counter.time = 5;
+	$("#questionForm").empty();
+	displayQuestion();
 }
 
 
 	displayQuestion();
-// Countdown starts here
-  counter.start();
+
 
 
 $(document).ready(function() {
