@@ -143,10 +143,9 @@ function displayQuestion() {
 // When this function is executed questionCounter is incremented by 1 and the next question in the array of questions is displayed on the screen
 
 function nextQuestion(){
-
+		userAnswer = "";
 		questionCounter++;
 		counter.time = 25;
-		userAnswer = "";
 		$("#questionForm").empty();
 		displayQuestion();
 
@@ -200,9 +199,12 @@ function nextQuestion(){
 
 
 	$("#submit").on("click", function () {
-	 		userAnswer = $("input[name='option']:checked").val();
+			// if(userAnswer !== ""){
+		userAnswer = $("input[name='option']:checked").val() || "";
+			// }
+	 		// userAnswer = $("input[name='option']:checked").val();
 	  	var correctAnswer = questions[questionCounter].answer;
-	 			console.log(userAnswer)
+	 		console.log(userAnswer)
 
 	 		if(userAnswer == ""){
 	 			unansweredCounter++;
@@ -210,12 +212,14 @@ function nextQuestion(){
 	 		}else if (userAnswer == correctAnswer){
 	 			correctCounter++;
 	  		console.log(correctCounter);
+	  		// userAnswer = "";
 	 		}else{
 	  		incorrectCounter++;
 	  		console.log(incorrectCounter);
+	  		// userAnswer = "";
 	 		}
-	 		nextQuestion();
 
+	 		nextQuestion();
   	});
 	});
 
