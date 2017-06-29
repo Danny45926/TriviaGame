@@ -1,34 +1,34 @@
-var correctCounter = 0;
-var incorrectCounter = 0;
-var unansweredCounter = 0;
-var questionCounter = 0;
-var userGuess = "";
+$(document).ready(function() {
 
-var questions =  [
-	{
-		question: "Which Artist Is Number #1 On The List For 250 Million Or More Records Sold?",
+	var correctCounter = 0;
+	var incorrectCounter = 0;
+	var unansweredCounter = 0;
+	var questionCounter = 0;
+	var userAnswer = "";
 
-		options: ["Michael Jackson", "Elvis Presley", "The Beatles", "Madonna"],
-
-		answer: "Elvis Presley",
-	}, {
-		question: "Who IS/WAS Nicknamed 'The King of R&B?'",
-		options: ["Usher", "R. Kelly", "Brian McKnight", "Maxwell"],
-		answer: "R.Kelly",
-	}, {
-		question: "What Was Michael Jackson's Biggest Song Of All Time?",
-		options: ["Billie Jean", "Don't Stop 'Til You Get Enough", "Man In The  Mirror", "Thriller"],
-		answer: "Thriller",
-	}, {
-		question: "When was the song 'Don't Stop Believin' by Journey released?",
-		options: ["1981", "1985", "1979", "1991"],
-		answer: "1981",
-	}, {
-		question: "Which Hip-Hop/Rap Group Released The First Hip-Hop Song 'Rappers Delight'?",
-		options: ["Public Enemy", "N.W.A", "Run-D.M.C.", "The Sugarhill Gang"],
-		answer: "Sugarhill Gang",
-	}
-];
+	var questions =  [
+		{
+			question: "Which Artist Is Number #1 On The List For 250 Million Or More Records Sold?",
+			options: ["Michael Jackson", "Elvis Presley", "The Beatles", "Madonna"],
+			answer: "Elvis Presley",
+		}, {
+			question: "Who IS/WAS Nicknamed 'The King of R&B?'",
+			options: ["Usher", "R. Kelly", "Brian McKnight", "Maxwell"],
+			answer: "R. Kelly",
+		}, {
+			question: "What Was Michael Jackson's Biggest Song Of All Time?",
+			options: ["Billie Jean", "Don't Stop 'Til You Get Enough", "Man In The  Mirror", "Thriller"],
+			answer: "Thriller",
+		}, {
+			question: "When was the song 'Don't Stop Believin' by Journey released?",
+			options: ["1981", "1985", "1979", "1991"],
+			answer: "1981",
+		}, {
+			question: "Which Hip-Hop/Rap Group Released The First Hip-Hop Song 'Rappers Delight'?",
+			options: ["Public Enemy", "N.W.A", "Run-D.M.C.", "Sugarhill Gang"],
+			answer: "Sugarhill Gang",
+		}
+	];
 
 
 
@@ -39,10 +39,10 @@ var questions =  [
 	// Countdown object
 	var counter = {
 
-		time: 5,
+		time: 25,
 
 		reset: function () {
-			counter.time = 5;
+			counter.time = 25;
 			counter.start;
 
 		},
@@ -60,10 +60,10 @@ var questions =  [
 
       // When counter reaches 00:00, game is over and the results are displayed
       if(counter.time == 0){
-        // clearInterval(counter.time)
+       	counter.stop();
         // audio.pause();
         // winMusic(winSound);
-        if(userGuess == ""){
+        if(userAnswer == ""){
         	unansweredCounter++;
         	// console.log();
         }
@@ -94,6 +94,15 @@ var questions =  [
 		},
 	};
 
+	var winSound = 'assets/music/MusicSoundsBetterWithYou.mp3';
+  // var audio2;
+  function winMusic(snd) {
+		audio = new Audio(snd)
+		
+		audio.currentTime = 62;
+		audio.play();
+	}
+
 
 function displayQuestion() {
 
@@ -118,13 +127,11 @@ function displayQuestion() {
 				// console.log(input);  
 				$("#questionForm").append(label);
 			}	
-	// Countdown starts here
-  	// counter.start();
 	}
 	else{
 		counter.stop();
-		// audio.pause();
-		// winMusic(winSound);
+		audio.pause();
+		winMusic(winSound);
 		$("#game").hide()
 		$(".display").hide();
 		$(".main").append("Correct: " + correctCounter + "<br>");
@@ -138,14 +145,12 @@ function displayQuestion() {
 function nextQuestion(){
 
 		questionCounter++;
-		counter.time = 5;
+		counter.time = 25;
+		userAnswer = "";
 		$("#questionForm").empty();
 		displayQuestion();
-};
 
-
-
-$(document).ready(function() {
+	};
 
 	displayQuestion();
 	counter.start();
@@ -153,7 +158,7 @@ $(document).ready(function() {
 	var gameSound = 'assets/music/WalkingOnADream.mp3';
   var audio;
   // Plays game sound on page load
-    function playSound(snd) {
+ function playSound(snd) {
       audio = new Audio(snd)
       audio.play();
     } playSound(gameSound);
@@ -175,30 +180,43 @@ $(document).ready(function() {
     }
 	})
 
-	$("#questionForm").on("click", "input", function () {
-  		var checkVal = ($(this).val()); 
-  		userGuess = checkVal;
-	  	console.log(userGuess);
+	// $("#questionForm").on("click", "input", function () {
+ //  		var checkVal = ($(this).val()); 
+ //  		userGuess = checkVal;
+	//   	console.log(userGuess);
 
-	  	var userAnswer = $("input[name='option']:checked").val();
+	//   	userAnswer = $("input[name='option']:checked").val();
+	//   	console.log(userAnswer)
+	//   	var correctAnswer = questions[questionCounter].answer;
 
+	//   	if(userAnswer === correctAnswer) {
+	//   		correctCounter++;
+	//   		console.log(correctCounter);
+	//   	}else if(userAnswer != correctAnswer){
+	//   		incorrectCounter++;
+	//   		console.log(incorrectCounter)
+	//   	}
+	//  });
+
+
+	$("#submit").on("click", function () {
+	 		userAnswer = $("input[name='option']:checked").val();
 	  	var correctAnswer = questions[questionCounter].answer;
+	 			console.log(userAnswer)
 
-	  	if(userAnswer == correctAnswer) {
-	  		correctCounter++;
-	  		console.log(correctCounter);
-	  	}else if(userAnswer != correctAnswer ){
-	  		incorrectCounter++;
-	  		console.log(incorrectCounter)
-	  	}
-	 });
-
-	 $("#submit").on("click", function () {
-	 		if(userGuess == ""){
+	 		if(userAnswer == ""){
 	 			unansweredCounter++;
+	 			console.log(unansweredCounter);
+	 		}else if (userAnswer == correctAnswer){
+	 			correctCounter++;
+	  		console.log(correctCounter);
+	 		}else{
+	  		incorrectCounter++;
+	  		console.log(incorrectCounter);
 	 		}
-      nextQuestion();
+	 		nextQuestion();
+
   	});
-});
+	});
 
 
