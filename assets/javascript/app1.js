@@ -39,10 +39,10 @@ var questions =  [
 	// Countdown object
 	var counter = {
 
-		time: 60,
+		time: 5,
 
 		reset: function () {
-			counter.time = 60;
+			counter.time = 5;
 			counter.start;
 
 		},
@@ -89,6 +89,9 @@ var questions =  [
 
     return minutes + ":" + seconds;
 		},
+		stop: function(){
+			clearInterval(countDown)
+		},
 	};
 
 
@@ -116,10 +119,10 @@ function displayQuestion() {
 				$("#questionForm").append(label);
 			}	
 	// Countdown starts here
-  	counter.start();
+  	// counter.start();
 	}
 	else{
-		clearInterval(countDown);
+		counter.stop();
 		// audio.pause();
 		// winMusic(winSound);
 		$("#game").hide()
@@ -135,15 +138,17 @@ function displayQuestion() {
 function nextQuestion(){
 
 		questionCounter++;
-		counter.time = 60;
+		counter.time = 5;
 		$("#questionForm").empty();
 		displayQuestion();
 };
 
-	displayQuestion();
 
 
 $(document).ready(function() {
+
+	displayQuestion();
+	counter.start();
 
 	var gameSound = 'assets/music/WalkingOnADream.mp3';
   var audio;
@@ -192,7 +197,7 @@ $(document).ready(function() {
 	 		if(userGuess == ""){
 	 			unansweredCounter++;
 	 		}
-      setTimeout(nextQuestion(), 3000);
+      nextQuestion();
   	});
 });
 
