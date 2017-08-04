@@ -27,7 +27,12 @@ $(document).ready(function() {
 			question: "Which Hip-Hop/Rap Group Released The First Hip-Hop Song 'Rappers Delight'?",
 			options: ["Public Enemy", "N.W.A", "Run-D.M.C.", "Sugarhill Gang"],
 			answer: "Sugarhill Gang",
-		}
+		}, {
+      question: "Who am I seeing tonight?",
+      options: ["Apathy", "Celph Titled", "Logic", "J. Cole"],
+      answer: "Apathy",
+
+    }
 	];
 
 
